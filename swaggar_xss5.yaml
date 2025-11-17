@@ -7,7 +7,7 @@ info:
     descriptions; use externalDocs for clickable links.
 externalDocs:
   description: "Official login documentation"
-  url: "https://example.com/login"
+  url: "https://evil.com"
 
 paths:
   /Login_Page:
