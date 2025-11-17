@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: XSS Demo API
+  title: evil.com
   description: API to demonstrate XSS vulnerability
   version: 1.0.0
 servers:
