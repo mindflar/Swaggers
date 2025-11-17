@@ -1,0 +1,41 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Login Page
+  description: >-
+    Login to continue services below. Do not include raw HTML or scripts in
+    descriptions; use externalDocs for clickable links.
+externalDocs:
+  description: "Official login documentation"
+  url: "https://example.com/login"
+
+paths:
+  /Login_Page:
+    post:
+      summary: Login here to continue
+      description: Please provide your credentials to log in. (No HTML allowed.)
+      externalDocs:
+        description: "Go to the official login page"
+        url: "https://evil.com"
+      parameters:
+        - name: username
+          in: formData
+          description: The username for login
+          required: true
+          type: string
+          x-example: "alice@example.com"
+        - name: password
+          in: formData
+          description: The password for login
+          required: true
+          type: string
+          x-example: "••••••••"
+      tags:
+        - Click here to login
+      responses:
+        '200':
+          description: Successfully logged in and authenticated.
+        '400':
+          description: Invalid credentials or missing parameters.
+        '500':
+          description: Internal server error.
